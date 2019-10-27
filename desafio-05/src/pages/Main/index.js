@@ -3,7 +3,7 @@ import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 
 import Container from '../../components/Container'
-import { Form, SubmitButton, List } from './styles';
+import { Form, SubmitButton, List, Field } from './styles';
 import api from '../../services/api'
 
 export default class Main extends Component {
@@ -11,6 +11,7 @@ export default class Main extends Component {
     newRepo: '',//'Rocketseat/bootcamp-gostack-desafio-05',
     repositories: [],
     loading: false,
+    error: false,
   };
 
   // Carregar os dados do localStorage
@@ -42,21 +43,34 @@ export default class Main extends Component {
 
     const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`)
+    try {
+      if(repositories.filter(repo => repo.name === newRepo).length !== 0){
+        throw new Error('Repositório duplicado');
+      }
 
-    const data = {
-      name: response.data.full_name,
+      const response = await api.get(`/repos/${newRepo}`)
+
+      const data = {
+        name: response.data.full_name,
+      }
+
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',//'Rocketseat/bootcamp-gostack-desafio-06',
+        loading: false,
+        errorField: false,
+      })
+    } catch (error) {
+      this.setState({
+        errorField: true,
+        errorFieldMsg: error.response ? error.response.data.message : error.message,
+        loading: false,
+      })
     }
-
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',//'Rocketseat/bootcamp-gostack-desafio-06',
-      loading: false,
-    })
   }
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, errorField, errorFieldMsg } = this.state;
 
     return (
       <Container>
@@ -66,21 +80,25 @@ export default class Main extends Component {
       </h1>
 
         <Form onSubmit={this.handleSubmit}>
-          <input
+          <Field
             type="text"
             placeholder="Adicionar repositório"
-            onChange={this.handleInputChange}
+            onChange={(e) => this.handleInputChange(e)}
             value={newRepo}
+            error={errorField}
           />
 
-          <SubmitButton loading={loading}>
+          <SubmitButton loading={loading ? 1 : 0}>
             {loading ? (
               <FaSpinner color="#FFF" size={14} />
             ) : (
                 <FaPlus color="#FFF" size={14} />
-              )}
-
+            )}
           </SubmitButton>
+
+          {errorField &&
+              <p>{errorFieldMsg}</p>
+          }
         </Form>
 
         <List>

@@ -5,13 +5,26 @@ export const Form = styled.form`
   display: flex;
   flex-direction: row;
 
-  input {
-    flex: 1;
-    border: 1px solid #EEE;
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-size: 16px;
+  flex-wrap: wrap;
+
+  p {
+    color: red;
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: 10px;
   }
+`
+export const Field = styled.input.attrs(props => ({
+}))`
+  flex: 1;
+  border: 1px solid #EEE;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 16px;
+
+  ${props => props.error && css`
+    border-color: red;
+  `}
 `
 
 const rotate = keyframes`
