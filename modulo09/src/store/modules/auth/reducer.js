@@ -20,8 +20,13 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
       case '@auth/SIGN_IN_FAILURE': {
-        draft.profle = action.payload.user;
+        draft.profile = action.payload.user;
         draft.loading = false;
+        break;
+      }
+      case '@auth/SIGN_OUT': {
+        draft.token = null;
+        draft.signed = false;
         break;
       }
       default:
