@@ -16,7 +16,7 @@ class Cache {
   async get(key) {
     const cached = await this.redis.get(key);
 
-    return cached ? JSON.stringify(cached) : null;
+    return cached ? JSON.parse(cached) : null;
   }
 
   invalidate(key) {
