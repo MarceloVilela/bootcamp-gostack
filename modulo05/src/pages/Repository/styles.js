@@ -1,13 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Loading = styled.div`
-  color: #FFF;
+  color: #fff;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-`
+`;
 export const Owner = styled.header`
   display: flex;
   flex-direction: column;
@@ -38,18 +38,18 @@ export const Owner = styled.header`
     text-align: center;
     max-width: 400px;
   }
-`
+`;
 
 export const IssueList = styled.ul`
   padding-top: 30px;
   margin-top: 30px;
-  border-top: 1px solid #EEE;
+  border-top: 1px solid #eee;
   list-style: none;
 
   li {
     display: flex;
     padding: 15px 10px;
-    border: 1px solid #EEE;
+    border: 1px solid #eee;
     border-radius: 4px;
 
     & + li {
@@ -65,7 +65,7 @@ export const IssueList = styled.ul`
 
     div {
       flex: 1;
-      margin-left:15px;
+      margin-left: 15px;
 
       strong {
         font-size: 16px;
@@ -81,7 +81,7 @@ export const IssueList = styled.ul`
       }
 
       span {
-        background: #EEE;
+        background: #eee;
         color: #333;
         border-radius: 2px;
         font-size: 12px;
@@ -98,4 +98,4 @@ export const IssueList = styled.ul`
       color: #999;
     }
   }
-`
+`;

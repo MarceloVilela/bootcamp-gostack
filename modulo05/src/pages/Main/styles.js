@@ -7,12 +7,12 @@ export const Form = styled.form`
 
   input {
     flex: 1;
-    border: 1px solid #EEE;
+    border: 1px solid #eee;
     padding: 10px 15px;
     border-radius: 4px;
     font-size: 16px;
   }
-`
+`;
 
 const rotate = keyframes`
   from {
@@ -22,11 +22,11 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
 export const SubmitButton = styled.button.attrs(props => ({
   type: 'submit',
-  //disabled: props.loading,
+  // disabled: props.loading,
 }))`
   background: #7159c1;
   border: 0;
@@ -43,12 +43,14 @@ export const SubmitButton = styled.button.attrs(props => ({
     opacity: 0.6;
   }
 
-  ${props => props.loading && css`
-    svg {
-      animation: ${rotate} 2s linear infinite;
-    }
-  `}
-`
+  ${props =>
+    props.loading &&
+    css`
+      svg {
+        animation: ${rotate} 2s linear infinite;
+      }
+    `}
+`;
 
 export const List = styled.ul`
   list-style: none;
@@ -62,7 +64,7 @@ export const List = styled.ul`
     align-items: center;
 
     & + li {
-      border-top: 1px solid #EEE;
+      border-top: 1px solid #eee;
     }
 
     a {
@@ -70,4 +72,4 @@ export const List = styled.ul`
       text-decoration: none;
     }
   }
-`
+`;
